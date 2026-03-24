@@ -1,6 +1,6 @@
 common_files:
   bot_branch_name: broadcast-common-files
   patterns_to_include: >
-    .gitattributes, .editorconfig
+    .gitattributes, .editorconfig , README.md
   destination: .
   commit_message: 'chore: update of common files'
