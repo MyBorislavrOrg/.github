@@ -63,7 +63,7 @@ jobs:
           echo "🚀 Начинаем добавление топика '$TOPIC'..."
           
           while IFS= read -r repo; do
-            echo -n "Обработка $repo ... "
+            echo "Обработка $repo ... "
           
             # Проверяем, есть ли уже такой топик
             echo "############### Проверяем, есть ли уже такой топик"
@@ -75,6 +75,7 @@ jobs:
             fi
           
             echo "############### Добавляем топик"
+            echo "gh repo edit \"$repo\" --add-topic \"$TOPIC\""
             gh repo edit "$repo" --add-topic "$TOPIC"
             if $?; then 
               echo "✅ топик добавлен"
