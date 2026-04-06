@@ -43,9 +43,9 @@ jobs:
           echo "🔎 Ищем репозитории, где есть файл $FILE_PATH..."
           
           # Репозитории, где файл присутствует (точный путь)
-          echo ### ============== gh search code '' --filename "$FILE_PATH" --owner "$ORG"
+          echo "### ============== gh search code '' --filename \"$FILE_PATH\" --owner \"$ORG\""
           gh search code '' --filename "$FILE_PATH" --owner "$ORG"
-          echo ### ============== gh search code "$FILE_PATH" --owner "$ORG" --match path
+          echo "### ============== gh search code \"$FILE_PATH\" --owner \"$ORG\" --match path"
           gh search code "$FILE_PATH" --owner "$ORG" --match path
           gh search code --filename "$FILE_PATH" --owner "$ORG" --json repository \
             | jq -r '.[].repository.nameWithOwner' | sort | uniq > repos_with_file.txt
@@ -64,20 +64,20 @@ jobs:
             exit 0
           fi
           
-          echo "🚀 Начинаем добавление топика '$TOPIC'..."
+#          echo "🚀 Начинаем добавление топика '$TOPIC'..."
+#          
+#          while IFS= read -r repo; do
+#            echo "Обработка $repo ... "
+#            echo "############### Добавляем топик"
+#            echo "gh repo edit \"$repo\" --add-topic \"$TOPIC\""
+#            if gh repo edit "$repo" --add-topic "$TOPIC" >/dev/null 2>&1; then
+#              echo "✅ топик добавлен"
+#            else
+#              echo "❌ ошибка"
+#            fi
+#          done < repos_without_file.txt
           
-          while IFS= read -r repo; do
-            echo "Обработка $repo ... "
-            echo "############### Добавляем топик"
-            echo "gh repo edit \"$repo\" --add-topic \"$TOPIC\""
-            if gh repo edit "$repo" --add-topic "$TOPIC" >/dev/null 2>&1; then
-              echo "✅ топик добавлен"
-            else
-              echo "❌ ошибка"
-            fi
-          done < repos_without_file.txt
+#          echo "🎉 Готово! Топик '$TOPIC' добавлен во все нужные репозитории."
           
-          echo "🎉 Готово! Топик '$TOPIC' добавлен во все нужные репозитории."
-          
-          # Очистка временных файлов
-          rm -f all_repos.txt repos_with_file.txt repos_without_file.txt
+#          # Очистка временных файлов
+#          rm -f all_repos.txt repos_with_file.txt repos_without_file.txt
