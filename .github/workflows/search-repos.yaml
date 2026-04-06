@@ -78,7 +78,7 @@ jobs:
             echo "gh repo edit \"$repo\" --add-topic \"$TOPIC\""
             gh repo edit "$repo" --add-topic "$TOPIC"
             echo "=========== gh repo edit ====================="
-            if $?; then 
+            if [[ $? > 0 ]]; then 
               echo "✅ топик добавлен"
             else
               echo "❌ ошибка"
