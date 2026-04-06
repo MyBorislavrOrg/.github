@@ -74,7 +74,8 @@ jobs:
             fi
           
             # Добавляем топик
-            if gh repo edit "$repo" --add-topic "$TOPIC" >/dev/null 2>&1; then
+            gh repo edit "$repo" --add-topic "$TOPIC"
+            if $?; then 
               echo "✅ топик добавлен"
             else
               echo "❌ ошибка"
